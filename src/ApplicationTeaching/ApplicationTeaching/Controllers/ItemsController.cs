@@ -22,7 +22,6 @@ namespace ApplicationTeaching.Controllers
         [HttpGet]
         public IEnumerable<Item> Get()
         {
-
             return dbContext.Items.ToList();
         }
     }

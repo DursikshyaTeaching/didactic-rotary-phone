@@ -36,6 +36,8 @@ namespace ApplicationTeaching
                 {
                     x.UseSqlServer($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={currentDir}\\data\\marketplace.mdf;Integrated Security=True");
                 });
+            services
+                .AddControllersWithViews();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -57,11 +59,17 @@ namespace ApplicationTeaching
 
             app.UseRouting();
 
+            app.UseStaticFiles();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}"
+                );
             });
         }
     }
