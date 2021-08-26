@@ -2,6 +2,7 @@ using ApplicationTeaching.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,14 +32,23 @@ namespace ApplicationTeaching
         {
 
             var currentDir = Environment.CurrentDirectory;
+
             services
                 .AddDbContext<MarketplaceDbContext>(x =>
                 {
                     x.UseSqlServer($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={currentDir}\\data\\marketplace.mdf;Integrated Security=True");
                 });
+
             services
                 .AddControllersWithViews();
+
             services.AddControllers();
+
+            services
+                .AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<MarketplaceDbContext>()
+                .AddDefaultTokenProviders();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApplicationTeaching", Version = "v1" });
