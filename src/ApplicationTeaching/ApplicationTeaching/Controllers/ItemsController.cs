@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace ApplicationTeaching.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ItemsController:ControllerBase
     {
         private readonly MarketplaceDbContext dbContext;

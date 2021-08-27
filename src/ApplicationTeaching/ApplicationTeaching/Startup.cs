@@ -1,4 +1,5 @@
 using ApplicationTeaching.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -45,6 +46,10 @@ namespace ApplicationTeaching
             services.AddControllers();
 
             services
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            services
                 .AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<MarketplaceDbContext>()
                 .AddDefaultTokenProviders();
@@ -70,6 +75,8 @@ namespace ApplicationTeaching
             app.UseRouting();
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
