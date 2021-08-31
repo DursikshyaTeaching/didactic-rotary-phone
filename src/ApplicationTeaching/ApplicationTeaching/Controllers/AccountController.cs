@@ -45,6 +45,12 @@ namespace ApplicationTeaching.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            signInManager.SignOutAsync();
+            return Redirect("/");
+        }
 
 
         [HttpPost]

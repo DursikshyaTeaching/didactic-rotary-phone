@@ -15,8 +15,6 @@ namespace ApplicationTeaching.Data
 
         }
         public DbSet<Item> Items { get; set; }
-        public DbSet<Category> Categories { get; set; }
-
 
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationTeaching.Controllers
 {
-    [Authorize]
+
     [ApiController]
     [Route("api/[controller]")]
     public class UserController : ControllerBase
@@ -15,7 +15,22 @@ namespace ApplicationTeaching.Controllers
         [HttpGet("{action}")]
         public string UserName()
         {
+            if (!HttpContext.User.Identity.IsAuthenticated)
+            {
+                HttpContext.Response.StatusCode = 401;
+                return "";
+            }
             return HttpContext.User.Identity.Name;
         }
+
+        
+
+        //[HttpGet("{action}")]
+        //public string IsLoggedIn()
+        //{
+        //    return HttpContext.User.Identity.Name;
+        //}
+
+
     }
 }
