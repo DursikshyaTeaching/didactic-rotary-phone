@@ -57,19 +57,18 @@ namespace ApplicationTeaching.Controllers
         }
 
 
+
         [HttpPost]
-        public void AddItem([FromForm] ItemViewModel model)
+        public void AddItem([FromForm]ItemViewModel model)
         {
 
             var item = (Item)model;
             Upload(model.Image);
 
-            item.ImageUrl = "/" + model.Image.FileName;
+            item.ImageUrl = "/uploads/" + model.Image.FileName;
 
             dbContext.Items.Add(item);
             dbContext.SaveChanges();
         }
-
-
     }
 }

@@ -28,6 +28,7 @@ namespace ApplicationTeaching.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel model)
         {
+
             var user = new IdentityUser(model.Password) { Email = model.Email };
             var result = userManager.CreateAsync(user, model.Password);
             if (result.Result.Succeeded)
@@ -58,6 +59,7 @@ namespace ApplicationTeaching.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 var result = signInManager.PasswordSignInAsync(model.Username, model.Password, true, default);
                 if(result.Result.Succeeded) return Redirect("/");
 

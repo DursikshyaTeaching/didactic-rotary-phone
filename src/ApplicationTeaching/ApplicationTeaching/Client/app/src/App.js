@@ -37,6 +37,13 @@ export default class App extends React.Component {
                 <Link to="/addItem">
                   <button className="btn btn-primary">Add Item</button>
                 </Link>
+                <Link to="/items">
+                  <button className="btn btn-primary">Items</button>
+                </Link>
+                <a href="/account/logout">
+                  <button className="btn btn-primary">Logout</button>
+                </a>
+                
               </Nav>
           </Container>
         </Navbar>

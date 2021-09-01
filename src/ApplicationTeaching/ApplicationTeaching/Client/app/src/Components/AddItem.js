@@ -17,22 +17,23 @@ export default class AddItem extends React.Component{
         formData.append("description",this.input.description);
         formData.append("image",this.input.image);
 
-
-
         console.log(formData,"formdata")
         console.log(this.input,"input")
 
-        let formImage = new FormData();
-        formImage.append("file",this.input.image)
-        console.log(formImage,"iiiiiiiiii")
-
-        // axiosClient.post("/items",formData)
-        axiosClient.post("/items/addImage",formData)
-
+        axiosClient.post("/items",formData,{
+            headers:{
+                "content-type": "multipart/form-data"
+            }
+        })
     }
     handleChange(e){
         console.log("changed")
-        this.input = {
+        e.currentTarget.type == "file"
+        ?this.input = {
+            ...this.input,
+            [e.currentTarget.name]:e.currentTarget.files[0]
+        }
+        :this.input = {
             ...this.input,
             [e.currentTarget.name]:e.currentTarget.value
         }
